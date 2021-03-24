@@ -1,0 +1,8 @@
+<div class="container">
+	<h1>Ejercicio 10 (tema 2)</h1>
+
+	<th:block th:each="n:${#numbers.sequence(1,20)}">
+		<th:block th:if="${n%2==0}" th:text="|${n} |"/>
+		<th:block th:if="${n%2!=0}" th:utext="|${h.resaltar(n)} |"/>
+	</th:block>
+</div>
