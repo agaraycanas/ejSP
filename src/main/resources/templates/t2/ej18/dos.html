@@ -1,3 +1,14 @@
 <div class="container">
-	<h1>Ej.18 - DOS</h1>
+	<h1>Ej 18 - DOS</h1>
+	
+	<h3>Escoge una opción</h3>
+	
+	<form action="/t2/ej18/3">
+		<th:block th:each="n:${#numbers.sequence(1,nOP)}">
+			<input type="radio" th:id="|id-${n}|" name="n" th:value="${n}" checked="checked"/>
+			<label th:for="|id-${n}|" th:text="${etiqueta[n-1]}"></label>
+			<br/>
+		</th:block>
+		<input type="submit"/>
+	</form>
 </div>
