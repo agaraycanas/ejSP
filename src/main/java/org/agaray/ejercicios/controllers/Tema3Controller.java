@@ -1,9 +1,7 @@
 package org.agaray.ejercicios.controllers;
 
-//import static java.util.Map.entry; 
-
+import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,49 +13,69 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/t3")
 public class Tema3Controller {
 
-	@GetMapping("ej12 ej12/1")
+	@GetMapping("ej12")
 	public String ej12_1(ModelMap m, HttpSession s) {
 		s.invalidate();
 		m.put("view", "t3/ej12/uno");
 		return "_t/frame";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@PostMapping("ej12/2")
 	public String ej12_2(
 			@RequestParam(value="nPasos",required = false) Integer nPasos,
 			@RequestParam(value="n",required = false) Integer n,
-			HttpSession s
+			@RequestParam(value="sumando", required=false) Integer sumando,
+			HttpSession s,
+			ModelMap m
 			) {
-			s.setAttribute("n", s.getAttribute("n")!=null ? s.getAttribute("n") : nPasos );
-		
-		return null;
+			
+			String vista = "";
+			
+			s.setAttribute("n", s.getAttribute("n")!=null ? s.getAttribute("n") : 1 );
+	        s.setAttribute("nTotal", s.getAttribute("nTotal")!=null ? s.getAttribute("nTotal") : nPasos );
+
+	        
+	        if (s.getAttribute("sumandos")!=null) {
+	        	s.setAttribute("sumandos", ((ArrayList<Integer>)s.getAttribute("sumandos")).add(sumando) );
+	        }
+	        else {
+	        	s.setAttribute("sumandos", new ArrayList<Integer>());
+	        }
+	        
+	        if ( (Integer)s.getAttribute("n") == ( (Integer)s.getAttribute("nTotal") ) + 1  ) {
+	        	vista="redirect:/t3/ej12/3";
+	        }
+	        else {
+	        	m.put("nActual", s.getAttribute("n"));
+	        	m.put("nTotal", s.getAttribute("nTotal"));
+	        	s.setAttribute("n",(Integer)(s.getAttribute("n")) + 1);
+	        	m.put("view", "t3/ej12/dos");
+	        	vista = "_t/frame";
+	        }
+	        
+	        return vista;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@GetMapping("ej12/3")
+	public String ej12_3(
+			HttpSession s,
+			ModelMap m
+			) {
+		m.put("sumandos",s.getAttribute("sumandos"));
+		m.put("suma", this.sumar((ArrayList<Integer>)s.getAttribute("sumandos")));
+		m.put("view", "ej12/tres");
+		return "_t/frame";
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	private int sumar(ArrayList<Integer> sumandos) {
+		int sol = 0;
+		for ( Integer sumando : sumandos) {
+			sol += (int)sumando;
+		}
+		return sol;
+	}
 
 
 }
