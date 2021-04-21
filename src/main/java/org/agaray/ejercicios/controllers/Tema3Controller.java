@@ -81,23 +81,6 @@ public class Tema3Controller {
 		}
 		return sol;
 	}
-	
-	private String AL2String(ArrayList<Integer> conjunto) {
-		String sol = "{ ";
-		if (conjunto != null ) {
-			for (Integer elemento : conjunto) {
-				if (elemento != null ) {
-					sol += elemento.toString();
-				}
-				else {
-					sol += "NULL";
-				}
-				sol += "  ";
-			}
-		}
-		sol += " }";
-		return sol;
-	}
 
 
 }
