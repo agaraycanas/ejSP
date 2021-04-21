@@ -1,6 +1,8 @@
 package org.agaray.ejercicios.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,7 +39,9 @@ public class Tema3Controller {
 
 	        
 	        if (s.getAttribute("sumandos")!=null) {
-	        	s.setAttribute("sumandos", ((ArrayList<Integer>)s.getAttribute("sumandos")).add(sumando) );
+	        	ArrayList<Integer> sumandos = ((ArrayList<Integer>)(s.getAttribute("sumandos")));
+	        	sumandos.add(sumando);
+	        	s.setAttribute("sumandos", sumandos );
 	        }
 	        else {
 	        	s.setAttribute("sumandos", new ArrayList<Integer>());
@@ -65,15 +69,33 @@ public class Tema3Controller {
 			) {
 		m.put("sumandos",s.getAttribute("sumandos"));
 		m.put("suma", this.sumar((ArrayList<Integer>)s.getAttribute("sumandos")));
-		m.put("view", "ej12/tres");
+		m.put("view", "t3/ej12/tres");
 		return "_t/frame";
 	}
 	
 	private int sumar(ArrayList<Integer> sumandos) {
 		int sol = 0;
-		for ( Integer sumando : sumandos) {
-			sol += (int)sumando;
+		//System.err.println(AL2String(sumandos));
+		for ( int  sumando : sumandos) {
+			sol += sumando;
 		}
+		return sol;
+	}
+	
+	private String AL2String(ArrayList<Integer> conjunto) {
+		String sol = "{ ";
+		if (conjunto != null ) {
+			for (Integer elemento : conjunto) {
+				if (elemento != null ) {
+					sol += elemento.toString();
+				}
+				else {
+					sol += "NULL";
+				}
+				sol += "  ";
+			}
+		}
+		sol += " }";
 		return sol;
 	}
 
