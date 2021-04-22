@@ -8,8 +8,7 @@
 	
 	function f() {
 		x = new XMLHttpRequest();
-		x.open("GET","<?=base_url().'t4/ej1/a?nombre='?>"+document.getElementById('idNombre').value,true);
-		//x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+		x.open("GET","/t4/ej1/a?nombre="+document.getElementById('idNombre').value,true);
 		x.send();
 		
 		x.onreadystatechange = function() {
