@@ -39,7 +39,9 @@ public class Tema4Controller {
 			case 1: ini ="Hola";break;
 			case 2:ini = "Qué tal estás";break;
 		}
-		String mensaje = ini + " " + nombre + " " + fin;
+		
+		int marca = ((new Random()).nextInt(3))+1;
+		String mensaje = "<h" + marca + ">"+ ini + " " + nombre + " " + fin + "</h" + marca + ">";
 		
 		return mensaje;
 	}
