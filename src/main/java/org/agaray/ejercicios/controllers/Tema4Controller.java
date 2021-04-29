@@ -45,4 +45,10 @@ public class Tema4Controller {
 		
 		return mensaje;
 	}
+
+	@GetMapping("ej2")
+	public String ej2() {
+		return "t4/ej02/index";
+	}
+
 }
