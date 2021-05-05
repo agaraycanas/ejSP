@@ -1,5 +1,6 @@
 package org.agaray.ejercicios.entities.t4.ej02;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -29,11 +30,13 @@ public class CCAA {
 	public CCAA() {
 		super();
 		this.nombre = "Desconocida";
+		this.provincias = new ArrayList<Provincia>();
 	}
 
 	public CCAA(String nombre) {
 		super();
 		this.nombre = nombre;
+		this.provincias = new ArrayList<Provincia>();
 	}
 
 	// *************************************

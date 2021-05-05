@@ -30,7 +30,7 @@
 	
 	function rellenarCCAA() {
 		y = new XMLHttpRequest();
-		y.open("GET","<?=base_url().'t4/ej2/X-rccaa'?>",true);
+		y.open("GET","/t4/ej2/X-rccaa",true);
 		y.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 		y.send();
 		
@@ -48,7 +48,7 @@
 	
 	function cambiarProvincia() {
 		x = new XMLHttpRequest();
-		x.open("GET","<?=base_url().'t4/ej2/X-rp?ccaa='?>"+document.getElementById('idCCAA').value,true);
+		x.open("GET","/t4/ej2/X-rp?ccaa="+document.getElementById('idCCAA').value,true);
 		x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 		x.send();
 		
