@@ -1,0 +1,36 @@
+<div class="container">
+	<h3>Lista de personas</h3>
+	
+	<h3>Elige sexo</h3>
+	<form action="/persona/rf">
+		<select name="sexo" onchange="submit()">
+			<div th:if="${sexo.equals('hombre')}">
+				<option value="hombre" selected="selected">Hombre</option>
+				<option value="mujer">Mujer</option>
+			</div>
+			
+			<div th:if="${sexo.equals('mujer')}">
+				<option value="hombre" >Hombre</option>
+				<option value="mujer" selected="selected">Mujer</option>
+			</div>
+			
+		</select>
+	</form>
+	
+	<table class="table table-striped">
+	<tr>
+		<th>Nombre</th>
+		<th>Sexo</th>
+		<th>Madurez</th>
+	</tr>
+	
+	<tr th:each="p : ${personas}">
+		<td th:text="${p.nombre}"/>
+		<td th:text="${p.sexo}"/>
+		<td th:text="|${p.getMadurez()} (${p.anyo})|"/>
+	</tr>
+	</table>
+	
+	<a href="/">Volver</a>
+	
+</div>

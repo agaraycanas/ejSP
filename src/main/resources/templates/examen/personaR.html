@@ -1,0 +1,20 @@
+<div class="container">
+	<h3>Lista de personas</h3>
+	
+	<table class="table table-striped">
+	<tr>
+		<th>Nombre</th>
+		<th>Sexo</th>
+		<th>Madurez</th>
+	</tr>
+	
+	<tr th:each="p : ${personas}">
+		<td th:text="${p.nombre}"/>
+		<td th:text="${p.sexo}"/>
+		<td th:text="|${p.getMadurez()} (${p.anyo})|"/>
+	</tr>
+	</table>
+	
+	<a href="/">Volver</a>
+	
+</div>
