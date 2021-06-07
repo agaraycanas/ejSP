@@ -1,7 +1,6 @@
 package org.agaray.ejercicios.controllers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;

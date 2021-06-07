@@ -1,6 +1,9 @@
 package org.agaray.ejercicios.controllers.examen;
 
 import org.agaray.ejercicios.entities.examen.Persona;
+import org.agaray.ejercicios.exception.DangerException;
+import org.agaray.ejercicios.exception.InfoException;
+import org.agaray.ejercicios.helpers.PRG;
 import org.agaray.ejercicios.repositories.examen.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,10 +27,15 @@ public class PersonaController {
 	}
 
 	@PostMapping("c")
-	public String cPersonaPOST(@RequestParam("nombre") String nombre, @RequestParam("sexo") String sexo,
-			@RequestParam("anyo") Integer anyo) {
-		personaRepository.save(new Persona(nombre, sexo, anyo));
-		return "redirect:/persona/r";
+	public void cPersonaPOST(@RequestParam("nombre") String nombre, @RequestParam("sexo") String sexo,
+			@RequestParam("anyo") Integer anyo) throws DangerException, InfoException {
+		try {
+			personaRepository.save(new Persona(nombre, sexo, anyo));
+		}
+		catch (Exception e) {
+			PRG.error("Nombre de persona "+ nombre +" ya existente","/persona/c");
+		}
+		PRG.info("Usuario "+nombre+" registrado", "/persona/c");
 	}
 
 	@GetMapping("r")
