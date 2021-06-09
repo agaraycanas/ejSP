@@ -1,9 +1,11 @@
 package org.agaray.ejercicios.controllers.examen;
 
+import org.agaray.ejercicios.entities.examen.Pais;
 import org.agaray.ejercicios.entities.examen.Persona;
 import org.agaray.ejercicios.exception.DangerException;
 import org.agaray.ejercicios.exception.InfoException;
 import org.agaray.ejercicios.helpers.PRG;
+import org.agaray.ejercicios.repositories.examen.PaisRepository;
 import org.agaray.ejercicios.repositories.examen.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,17 +22,30 @@ public class PersonaController {
 	@Autowired
 	private PersonaRepository personaRepository;
 
+	@Autowired
+	private PaisRepository paisRepository;
+	
 	@GetMapping("c")
 	public String cPersonaGET(ModelMap m) {
 		m.put("view", "examen/personaCGET");
+		m.put("paises", paisRepository.findAll());
 		return "_t/frame";
 	}
 
 	@PostMapping("c")
-	public void cPersonaPOST(@RequestParam("nombre") String nombre, @RequestParam("sexo") String sexo,
-			@RequestParam("anyo") Integer anyo) throws DangerException, InfoException {
+	public void cPersonaPOST(
+			@RequestParam("nombre") String nombre, 
+			@RequestParam("sexo") String sexo,
+			@RequestParam("anyo") Integer anyo,
+			@RequestParam("idPais") Long idPais
+			
+			) throws DangerException, InfoException {
+		
 		try {
-			personaRepository.save(new Persona(nombre, sexo, anyo));
+			Pais pais = paisRepository.getOne(idPais);
+			Persona persona = new Persona(nombre, sexo, anyo, pais);
+			pais.getPersonas().add(persona);
+			personaRepository.save(persona);
 		}
 		catch (Exception e) {
 			PRG.error("Nombre de persona "+ nombre +" ya existente","/persona/c");

@@ -1,10 +1,12 @@
 package org.agaray.ejercicios.entities.examen;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Persona {
@@ -20,20 +22,30 @@ public class Persona {
 	private String sexo;
 	private Integer anyo;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Pais pais;
+	
+	
+	
+	
 	//==============================
 
 	public Persona() {
 	}
 
-	public Persona(String nombre, String sexo, Integer anyo) {
+	public Persona(String nombre, String sexo, Integer anyo, Pais pais) {
 		super();
 		this.nombre = nombre;
 		this.sexo = sexo;
 		this.anyo = anyo;
+		if (pais != null) {
+			this.pais = pais;
+		}
 	}
 
 	//==============================
 
+	
 	public String getMadurez() {
 		String sol = "maduro";
 		if (this.anyo>=1995) {
@@ -45,6 +57,14 @@ public class Persona {
 		return sol;
 		
 	}
+	public Pais getPais() {
+		return pais;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
 	public Long getId() {
 		return id;
 	}

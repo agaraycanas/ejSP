@@ -1,0 +1,16 @@
+<div class="container">
+
+	<h1>Lista de países</h1>
+	
+	<table class="table table-striped">
+		<tr>
+			<th>Nombre</th>
+			<th>Num.hab.</th>
+		</tr>
+		
+		<tr th:each=" p : ${paises}">
+			<td th:text="${p.nombre}"/>
+			<td th:text="${p.getNumHabitantes()}"/>
+		</tr>
+	</table>
+</div>

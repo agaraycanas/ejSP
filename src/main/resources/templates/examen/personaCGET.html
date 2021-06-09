@@ -18,6 +18,13 @@
 			<input id="idMujer" type="radio" name="sexo" value="mujer" checked="checked"/>
 			<label for="idMujer">Mujer</label>
 		</fieldset>
+		<br/>
+		
+		País
+		<select name="idPais">
+			<option th:each="pais:${paises}" th:text="${pais.nombre}" th:value="${pais.id}"/>
+		</select>
+		<br/>
 		
 		<input type="submit"/>
 	</form>

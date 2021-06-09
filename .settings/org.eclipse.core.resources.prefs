@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/templates/examen/paisCGet.html=UTF-8
+encoding//src/main/resources/templates/examen/paisR.html=UTF-8
 encoding//src/main/resources/templates/examen/personaCGET.html=UTF-8
 encoding//src/main/resources/templates/examen/personaR.html=UTF-8
 encoding//src/main/resources/templates/examen/personaRF.html=UTF-8
